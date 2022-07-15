@@ -1,14 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { MAIN_URL } from '../config';
 
-export const networksApi = createApi({
-    reducerPath: 'networks',
+export const stationsApi = createApi({
+    reducerPath: 'stations',
     baseQuery: fetchBaseQuery({ baseUrl: `${MAIN_URL}`}),
     endpoints: (build) => ({
-        getNetworks: build.query({
-            query: () => `networks`
+        getStations: build.query({
+            query: (networkId) => `networks/${networkId}`
         })
     })
 });
 
-export const { useGetNetworksQuery } = networksApi;
+export const { useGetStationsQuery } = stationsApi;
