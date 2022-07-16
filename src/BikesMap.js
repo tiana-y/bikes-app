@@ -20,9 +20,9 @@ export function BikesMap() {
 
     return (
         <div>
-            <Map height={height * 0.9} width={width} defaultCenter={[50, 5]} defaultZoom={3}>
+            <Map height={height - 50} width={width - 17} defaultCenter={[48.51, 2.56]} defaultZoom={10}>
                 <Marker 
-                    anchor={[50, 5]} 
+                    anchor={[48.51, 2.56]} 
                     width={30}
                     color={markerColor}
                 />

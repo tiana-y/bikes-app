@@ -5,6 +5,7 @@ import { useGetStationsQuery } from "./redux/stationsApi";
 import { useAddFavoriteMutation, useDeleteFavoriteMutation, useGetFavoritesQuery } from "./redux/favoritesApi";
 import { BikesMap } from "./BikesMap";
 import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 
 function App() {
   const [currentNetwork, selectNetwork] = useState(null);
@@ -56,6 +57,7 @@ function App() {
     <div>
       <Header/>
       <BikesMap />
+      <Footer/>
     </div>
   )
 
