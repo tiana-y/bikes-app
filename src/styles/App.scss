@@ -1,0 +1,9 @@
+@import 'Colors.scss';
+
+body {
+    margin: 0;
+    background: $first-color;
+    background: linear-gradient(90deg, $first-color 0%, $second-color 100%);
+    font-family: 'Lato', sans-serif;
+    color: $text-color;
+}
