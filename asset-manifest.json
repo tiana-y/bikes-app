@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/bikes-app/static/css/main.1f24ba96.css",
+    "main.js": "/bikes-app/static/js/main.74ec58e7.js",
+    "static/media/bike_circle_logo.svg": "/bikes-app/static/media/bike_circle_logo.4900266f1af52919a3a88d34cf40069c.svg",
+    "static/media/thin_bike_icon.svg": "/bikes-app/static/media/thin_bike_icon.6236d4e8c4c158d4af7eba8f7a5f5ec3.svg",
+    "index.html": "/bikes-app/index.html",
+    "main.1f24ba96.css.map": "/bikes-app/static/css/main.1f24ba96.css.map",
+    "main.74ec58e7.js.map": "/bikes-app/static/js/main.74ec58e7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1f24ba96.css",
+    "static/js/main.74ec58e7.js"
+  ]
+}
