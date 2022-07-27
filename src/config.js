@@ -1,1 +1,1 @@
-export const MAIN_URL = "http://api.citybik.es/v2/";
+export const MAIN_URL = "https://api.citybik.es/v2/";
