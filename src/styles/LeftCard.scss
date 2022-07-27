@@ -1,0 +1,133 @@
+@import './Colors.scss';
+
+.card-container {
+    position: absolute;
+    top: 50px;
+    background: $left-card-color;
+    margin-top: 3px;
+    border-radius: 0px 10px 10px 0px;
+    max-height: 92%;
+    padding: 5px;
+
+    width: 20%;
+    min-width: 100px;
+    max-width: 280px;
+}
+
+.network-container {
+    background-color: rgba(255, 255, 255, 0.6);
+    margin-top: 7px;
+    border-radius: 7px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.7);
+    }
+
+    &.selected {
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    .name {
+        font-size: 14pt;
+        text-align: center;
+        padding: 2px 0;
+    }
+
+    .location {
+        font-size: 10pt;
+        text-align: center;
+        padding: 2px 0 6px 0;
+    }
+}
+
+.search-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 5px;
+
+    input {
+        border-radius: 5px;
+        border: none;
+        width: 80%;
+        height: 20px;
+        text-overflow: ellipsis;
+        color: $text-color;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    button {
+        border-radius: 5px;
+        border: none;
+        background-color: white;
+        margin-left: 4px;
+        cursor: pointer;
+
+        img {
+            width: 20px;
+            margin-top: -3px;
+        }
+    }
+}
+
+.checkbox-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 2px;
+
+    .label {
+        display: block;
+        position: relative;
+        padding-left: 30px;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+    
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: white;
+        border-radius: 5px;
+
+        &:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+    }
+
+    input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    .checkmark:after {
+        left: 6px;
+        top: 2px;
+        width: 5px;
+        height: 10px;
+        border: solid $text-color;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+        border-radius: 2px;
+      }
+
+}

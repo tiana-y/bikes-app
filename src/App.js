@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import { useGetNetworksQuery } from "./redux/networksApi";
 import { useGetStationsQuery } from "./redux/stationsApi";
 import { useAddFavoriteMutation, useDeleteFavoriteMutation, useGetFavoritesQuery } from "./redux/favoritesApi";
-import { BikesMap } from "./BikesMap";
+import { BikesMap } from "./components/BikesMap";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
+import { LeftCard } from "./components/LeftCard/LeftCard";
 
 function App() {
   const [currentNetwork, selectNetwork] = useState(null);
@@ -57,6 +58,10 @@ function App() {
     <div>
       <Header/>
       <BikesMap />
+      <LeftCard
+        networks={networksData.networks.slice(0, 10)}
+        currentNetworkId={currentNetwork}
+      />
       <Footer/>
     </div>
   )

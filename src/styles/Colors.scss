@@ -1,5 +1,9 @@
 $first-color: #7E94E3;
+$first-color-80: #7d93e3cc;
 $second-color: #6FE4DA;
+$second-color-90: #6de3d9e6;
 $text-color: #30395B;
 $accent-color: #C20B58;
 $accent-color-80: #c10b57cc;
+
+$left-card-color: linear-gradient(90deg, $first-color-80 0%, rgba(161, 190, 234, 0.8) 100%);
