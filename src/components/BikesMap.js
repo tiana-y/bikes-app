@@ -1,12 +1,15 @@
-import { Map, Marker, ZoomControl } from "pigeon-maps";
+import { Map, Marker, Overlay, ZoomControl } from "pigeon-maps";
 import { useEffect, useState } from "react";
-import { Tooltip } from "./Tooltip";
+import "../styles/Map.scss";
 
 export function BikesMap(props) {
     const { stations, leftCardRef } = props;
     const [width, setWidth] = useState(window.innerWidth);
     const [height, setHeight] = useState(window.innerHeight);
     const [center, setCenter] = useState([0,0]);
+
+    const [showTooltip, setShowTooltip] = useState(false);
+    const [stationForTooltip, setStationForTooltip] = useState(null);
 
     const markerColor = `hsl(${176 % 360}deg 100% 60%)`;
     
@@ -28,26 +31,28 @@ export function BikesMap(props) {
             return arr.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2;
         }
         if (stations) {
-            // console.log({stations})
+            console.log(stations[0])
             const lat = median(stations.map(s => s.latitude));
             const lng = median(stations.map(s => s.longitude));
             setCenter([lat, lng]);
         }
     }, [stations]);
 
-    useEffect(() => {
-        console.log({leftCardRef})
-        console.log(leftCardRef?.current.clientWidth)
-    }, [leftCardRef]);
+    const onMouseOverStation = (station) => {
+        setShowTooltip(true);
+        setStationForTooltip(station);
+    }
 
-
+    const onMouseOut = () => {
+        setShowTooltip(false);
+        setStationForTooltip(null);
+    }
 
     return (
         <div>
             <Map height={height - 50} width={width - 17} center={center} defaultZoom={10}>
                 <ZoomControl 
                     style={{ left: leftCardRef?.current.clientWidth + 10, zIndex: 110 }}
-                    // style={{ right: 10, left: "none" }}
                 />
 
                 {stations && stations.map(s => (
@@ -56,13 +61,22 @@ export function BikesMap(props) {
                         anchor={[s.latitude, s.longitude]} 
                         // width={30}
                         color={markerColor}
+                        onMouseOver={() => onMouseOverStation(s)}
+                        onMouseOut={onMouseOut}
                     />
+                        
                 ))}
-                {/* <Marker 
-                    anchor={[48.51, 2.56]} 
-                    width={30}
-                    color={markerColor}
-                /> */}
+
+                {showTooltip &&
+                <Overlay 
+                    anchor={[stationForTooltip.latitude, stationForTooltip.longitude]}
+                    offset={[60, 60]}
+                >
+                    <div className="marker-tooltip">
+                        {stationForTooltip.name}
+                    </div>
+                </Overlay>
+                }
             </Map>
         </div>
     );
