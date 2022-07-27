@@ -1,8 +1,12 @@
-import "./App.scss";
+import "./styles/App.scss";
 import { useEffect, useState } from "react";
 import { useGetNetworksQuery } from "./redux/networksApi";
 import { useGetStationsQuery } from "./redux/stationsApi";
 import { useAddFavoriteMutation, useDeleteFavoriteMutation, useGetFavoritesQuery } from "./redux/favoritesApi";
+import { BikesMap } from "./components/BikesMap";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
+import { LeftCard } from "./components/LeftCard/LeftCard";
 
 function App() {
   const [currentNetwork, selectNetwork] = useState(null);
@@ -13,8 +17,8 @@ function App() {
     isLoading: isLoadingStations,
   } = useGetStationsQuery(currentNetwork);
   const { data: favStations, isLoading: isLoadingFav } = useGetFavoritesQuery(currentNetwork);
-  const [ addFavorite ] = useAddFavoriteMutation();
-  const [ deleteFavorite ] = useDeleteFavoriteMutation();
+  const [addFavorite] = useAddFavoriteMutation();
+  const [deleteFavorite] = useDeleteFavoriteMutation();
 
 
   useEffect(() => {
@@ -22,7 +26,7 @@ function App() {
       const firstNw = networksData.networks[0];
       selectNetwork(firstNw.id);
     }
-  },[currentNetwork, networksData]);
+  }, [currentNetwork, networksData]);
 
   const isInFavorites = (stationId) => {
     const result = findInFavorites(stationId);
@@ -42,7 +46,7 @@ function App() {
   }
 
   const handleFavClick = async (stationId) => {
-    await addFavorite({ networkId: currentNetwork, stationId}).unwrap();
+    await addFavorite({ networkId: currentNetwork, stationId }).unwrap();
   }
 
   const handleUnfavClick = async (stationId) => {
@@ -51,38 +55,50 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <header className="App-header">Hello</header>
-      <div>
-        <ul>
-          {networksData.networks.slice(0, 10).map((nw) => (
-            <li key={nw.id}>
-              {nw.name}
-              <br />
-              location: {nw.location.city} <span> </span>
-              <button onClick={() => selectNetwork(nw.id)}>Select</button>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <h3>Stations</h3>
-      {isLoadingStations && <div>Loading</div>}
-      {currentNetwork && stationsData && !isLoadingStations && (
-        <ul>
-          {stationsData.network.stations.slice(0, 20).map((st) => (
-            <li key={st.id}>
-              {st.name}
-              <span> </span>
-              {isInFavorites(st.id)
-               ? <button onClick={() => handleUnfavClick(st.id)}>Unfav</button>
-               : <button onClick={() => handleFavClick(st.id)}>Fav</button>
-              }
-            </li>
-          ))}
-        </ul>
-      )}
+    <div>
+      <Header/>
+      <BikesMap />
+      <LeftCard
+        networks={networksData.networks.slice(0, 10)}
+        currentNetworkId={currentNetwork}
+      />
+      <Footer/>
     </div>
-  );
+  )
+
+  // return (
+  //   <div className="App">
+  //     <header className="App-header">Hello</header>
+  //     <div>
+  //       <ul>
+  //         {networksData.networks.slice(0, 10).map((nw) => (
+  //           <li key={nw.id}>
+  //             {nw.name}
+  //             <br />
+  //             location: {nw.location.city} <span> </span>
+  //             <button onClick={() => selectNetwork(nw.id)}>Select</button>
+  //           </li>
+  //         ))}
+  //       </ul>
+  //     </div>
+  //     <h3>Stations</h3>
+  //     {isLoadingStations && <div>Loading</div>}
+  //     {currentNetwork && stationsData && !isLoadingStations && (
+  //       <ul>
+  //         {stationsData.network.stations.slice(0, 20).map((st) => (
+  //           <li key={st.id}>
+  //             {st.name}
+  //             <span> </span>
+  //             {isInFavorites(st.id)
+  //              ? <button onClick={() => handleUnfavClick(st.id)}>Unfav</button>
+  //              : <button onClick={() => handleFavClick(st.id)}>Fav</button>
+  //             }
+  //           </li>
+  //         ))}
+  //       </ul>
+  //     )}
+  //   </div>
+  // );
 }
 
 export default App;
