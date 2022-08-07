@@ -1,0 +1,57 @@
+@import './Colors.scss';
+
+.station-card-container {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background: $right-card-color;
+    margin-top: 3px;
+
+    border-radius: 10px 0px 0px 10px;
+    padding: 5px;
+
+    width: 25%;
+    min-width: 200px;
+    max-width: 300px;
+    z-index: 100;
+
+    .station-name {
+        text-align: center;
+        font-size: 14pt;
+    }
+
+    .station-info {
+        text-align: center;
+        margin-top: 5px;
+        table {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        th {
+            padding-left: 15px;
+            padding-right: 15px;
+            
+        }
+        td {
+            padding: 3px;
+        }
+    }
+
+    .card-footer {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: row;
+        .fav-button {
+            flex-grow: 1;
+        }
+
+        .updated-info {
+            font-size: 10pt;
+            flex-grow: 1;
+            align-items: flex-end;
+            text-align: end;
+            margin-right: 5px;
+        }
+    }
+}

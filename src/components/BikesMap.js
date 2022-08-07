@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import "../styles/Map.scss";
 
 export function BikesMap(props) {
-    const { stations, leftCardRef } = props;
+    const { stations, leftCardRef, currentStation, onStationClick } = props;
     const [width, setWidth] = useState(window.innerWidth);
     const [height, setHeight] = useState(window.innerHeight);
     const [center, setCenter] = useState([0,0]);
@@ -11,7 +11,8 @@ export function BikesMap(props) {
     const [showTooltip, setShowTooltip] = useState(false);
     const [stationForTooltip, setStationForTooltip] = useState(null);
 
-    const markerColor = `hsl(${176 % 360}deg 100% 60%)`;
+    const markerColor = `hsl(${176 % 360}deg 47% 60%)`;
+    const selectedMarkerColor = `hsl(${176 % 360}deg 100% 65%)`;
     
     useEffect(() => {
         const handler = () => {
@@ -31,7 +32,6 @@ export function BikesMap(props) {
             return arr.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2;
         }
         if (stations) {
-            console.log(stations[0])
             const lat = median(stations.map(s => s.latitude));
             const lng = median(stations.map(s => s.longitude));
             setCenter([lat, lng]);
@@ -59,10 +59,12 @@ export function BikesMap(props) {
                     <Marker
                         key={s.id}
                         anchor={[s.latitude, s.longitude]} 
-                        // width={30}
-                        color={markerColor}
+                        width={s.id === currentStation?.id ? 30 : 25}
+                        color={s.id === currentStation?.id ? selectedMarkerColor : markerColor}
                         onMouseOver={() => onMouseOverStation(s)}
                         onMouseOut={onMouseOut}
+                        onClick={() => onStationClick(s)}
+                        style={{ zIndex: s.id === currentStation?.id ? 2 : 1 }}
                     />
                         
                 ))}
@@ -71,6 +73,7 @@ export function BikesMap(props) {
                 <Overlay 
                     anchor={[stationForTooltip.latitude, stationForTooltip.longitude]}
                     offset={[0, 0]}
+                    style={{ zIndex: 3 }}
                 >
                     <div className="marker-tooltip">
                         <div>

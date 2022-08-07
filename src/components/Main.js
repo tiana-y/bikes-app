@@ -5,10 +5,12 @@ import { useAddFavoriteMutation, useDeleteFavoriteMutation, useGetFavoritesQuery
 
 import { BikesMap } from "./BikesMap";
 import { LeftCard } from "./LeftCard/LeftCard";
+import { RightCard } from './RightCard/RightCard';
 
 export function Main() {
     const leftCardRef = useRef(0);
     const [currentNetwork, selectNetwork] = useState(null);
+    const [currentStation, selectStation] = useState(null);
     const { data: networksData, isLoading: isLoadingNetworks } =
         useGetNetworksQuery();
     const {
@@ -60,12 +62,18 @@ export function Main() {
             <BikesMap 
                 stations={stationsData?.network?.stations}
                 leftCardRef={leftCardRef}
+                onStationClick={selectStation}
+                currentStation={currentStation}
             />
             <LeftCard
                 networks={networksData.networks}
                 currentNetworkId={currentNetwork}
-                onNetworkClick={nw => selectNetwork(nw)}
+                onNetworkClick={selectNetwork}
                 leftCardRef={leftCardRef}
+            />
+            <RightCard
+                currentStation={currentStation}
+        
             />
         </>
 
