@@ -4,9 +4,9 @@ import { SearchNetwork } from "./SearchNetworks";
 
 export function LeftCard(props)
 {
-    const { networks, currentNetworkId } = props;
+    const { networks, currentNetworkId, onNetworkClick, leftCardRef } = props;
     return (
-        <div className="card-container">
+        <div className="card-container" ref={leftCardRef}>
             <SearchNetwork/>
             {networks.map(nw => (
                 <NetworkComponent
@@ -15,6 +15,7 @@ export function LeftCard(props)
                     city={nw.location.city}
                     country={nw.location.country}
                     selected={nw.id === currentNetworkId}
+                    onClick={() => onNetworkClick(nw.id)}
                 />
             ))}
             <div className="checkbox-container">
