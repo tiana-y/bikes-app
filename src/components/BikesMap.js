@@ -70,10 +70,15 @@ export function BikesMap(props) {
                 {showTooltip &&
                 <Overlay 
                     anchor={[stationForTooltip.latitude, stationForTooltip.longitude]}
-                    offset={[60, 60]}
+                    offset={[0, 0]}
                 >
                     <div className="marker-tooltip">
-                        {stationForTooltip.name}
+                        <div>
+                            {stationForTooltip.name}
+                        </div>
+                        <div className="free-bikes-info">
+                            Free bikes: {stationForTooltip.free_bikes}
+                        </div>
                     </div>
                 </Overlay>
                 }
