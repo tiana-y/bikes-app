@@ -62,7 +62,7 @@ export function Main() {
                 leftCardRef={leftCardRef}
             />
             <LeftCard
-                networks={networksData.networks.slice(0, 10)}
+                networks={networksData.networks}
                 currentNetworkId={currentNetwork}
                 onNetworkClick={nw => selectNetwork(nw)}
                 leftCardRef={leftCardRef}
