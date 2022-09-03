@@ -1,0 +1,14 @@
+{
+  "favorites": [
+    {
+      "networkId": "velobike-moscow",
+      "stationId": "ac022f0470de9722cc62e06ade73b0a6",
+      "id": 2
+    },
+    {
+      "networkId": "velobike-moscow",
+      "stationId": "2a711f9eb3228be91abce39eca68e118",
+      "id": 3
+    }
+  ]
+}
